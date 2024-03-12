@@ -1,6 +1,10 @@
 /* eslint-disable no-console */
-const moongoose = require('mongoose')
-require('dotenv').config()
+// const moongoose = require('mongoose')
+import mongoose from 'mongoose'
+
+import dotenv from 'dotenv'
+
+dotenv.config()
 
 const connectToDatabase = async () => {
     if (process.env.MONGODB_URL == null) {
@@ -8,7 +12,7 @@ const connectToDatabase = async () => {
     }
 
     try {
-        await moongoose.connect(process.env.MONGODB_URL, {})
+        await mongoose.connect(process.env.MONGODB_URL, {})
     } catch (error) {
         throw new Error(
             `Error connecting to the database. Error: ${error.message}`
@@ -16,4 +20,4 @@ const connectToDatabase = async () => {
     }
 }
 
-module.exports = connectToDatabase
+export default connectToDatabase
