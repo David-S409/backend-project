@@ -9,10 +9,22 @@ import { findUserByEmail } from '../services/user.service.js'
 
 const router = Router()
 
+/**
+ * Logout
+ * @route {GET} /v1/api/auth/logout
+ * @returns  user logout message
+ */
 router.get('/logout', (req, res) => {
     res.clearCookie('token').json({ message: 'Logged out' })
 })
 
+/**
+ * Login
+ * @route {POST} /v1/api/auth/login
+ * @bodyparam email
+ * @bodyparam password
+ * @returns  user login message and user data
+ */
 router.post('/login', async (req, res) => {
     try {
         const { email, password } = req.body
@@ -49,6 +61,7 @@ router.post('/login', async (req, res) => {
         return res.status(error.status || 500).json({ message: error.message })
     }
 })
+
 /**
  * Register
  * @route {POST} /v1/api/auth/register
